@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:growl  id="mensagem" showDetail="true" autoUpdate="true"
+		closable="true" />
+
+	<h:form id="frmAluno">
+		<p:panelGrid columns="2" style="horizontal-align:center">
+			<h:outputText value="Matricula:" />
+			<h:inputText id="matricula" value="#{alunoMB.aluno.matricula}" />
+
+			<h:outputLabel for="nome" value="Nome:" />
+			<h:inputText id="nome" value="#{alunoMB.aluno.nome}" />
+			<h:outputLabel value="Telefone:" />
+			<h:inputText id="telefone" value="#{alunoMB.aluno.telefone}" />
+			<h:outputLabel value="Email:" />
+			<h:inputText id="email" value="#{alunoMB.aluno.email}" />
+			<h:outputLabel value="Data Cadastro:" />
+			<p:calendar value="#{alunoMB.aluno.dataCadastro}" locale="pt_BR"
+				id="dataCadastro" showButtonPanel="true">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</p:calendar>
+		</p:panelGrid>
+		<p:panelGrid columns="6">
+			<h:commandButton action="#{alunoMB.incluir}" value="Incluir"
+				update="tabela" />
+			<h:commandButton action="#{alunoMB.alterar}" value="alterar"
+				update="tabela" />
+			<h:commandButton action="#{alunoMB.consultar}" value="Consultar"
+				update="tabela, :frmAluno" />
+			<h:commandButton action="#{alunoMB.listar}" value="Listar"
+				update="tabela" />
+			<h:commandButton action="#{alunoMB.excluir}" value="Excluir"
+				update="tabela" />
+			<h:commandButton action="#{alunoMB.limpar}" value="Limpar"
+				update="tabela" />
+
+		</p:panelGrid>
+	</h:form>
+	<p:dataTable id="tabela" var="item" value="#{alunoMB.lista}"
+		paginator="true" rows="50" emptyMessage="Não há registros na lista"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="10,15,25,50,100">
+		<f:facet name="header">Lista de Alunos</f:facet>
+		<p:column headerText="ID" style="width: 10%;"
+			sortBy="#{item.matricula}">
+			<h:outputText value="#{item.matricula}" />
+		</p:column>
+		<p:column headerText="Nome" style="width: 25%;" sortBy="#{item.nome}">
+			<h:outputText value="#{item.nome}" />
+		</p:column>
+		<p:column headerText="Telefone" style="width: 25%;"
+			sortBy="#{item.telefone}">
+			<h:outputText value="#{item.telefone}" />
+		</p:column>
+		<p:column headerText="E-mail" style="width: 25%;"
+			sortBy="#{item.email}">
+			<h:outputText value="#{item.email}" />
+		</p:column>
+	</p:dataTable>
+</h:body>
+</html>

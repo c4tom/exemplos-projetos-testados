@@ -1,0 +1,6 @@
+.sonarlint
+.history
+.project
+.settings
+target
+build
